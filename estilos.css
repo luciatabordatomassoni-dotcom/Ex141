@@ -1,130 +1,94 @@
-/* ── VARIABLES DE DISEÑO ── */
-:root {
-  --fondo-oscuro: #0a0a0a;
-  --fondo-gris: #121212;
-  --blanco-puro: #ffffff;
-  --gris-informativo: #e0e0e0;
-  --acento-grafico: #4a5568; /* Tono neutro y solemne para datos */
-  --rojo-alerta: #ff3333;
-  
-  --font-macro: 'Montserrat', sans-serif;
-  --font-info: 'Open Sans', sans-serif;
-  --font-maquina: 'Special Elite', monospace;
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+ --negro:#050505;
+ --gris:#151515;
+ --blanco:#fff;
+ --gris-texto:#cfcfcf;
+ --acento:#777;
+}
+html{scroll-behavior:smooth}
+body{
+ background:var(--negro);
+ color:var(--blanco);
+ font-family:'Open Sans',sans-serif;
 }
 
-/* ── RESTART Y CONFIGURACIÓN GLOBAL ── */
-*, *::before, *::after { 
-  box-sizing: border-box; 
-  margin: 0; 
-  padding: 0; 
+.slide{
+ min-height:100vh;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:8vw;
+ background:#050505;
 }
 
-html { 
-  scroll-behavior: smooth; 
-  background-color: var(--fondo-oscuro);
+.contenido{
+ max-width:900px;
 }
 
-body {
-  font-family: var(--font-info);
-  background: var(--fondo-oscuro);
-  color: var(--blanco-puro);
-  overflow-x: hidden;
-  line-height: 1.6;
+.etiqueta{
+ font-size:.85rem;
+ letter-spacing:.18em;
+ text-transform:uppercase;
+ color:#aaa;
+ margin-bottom:40px;
 }
 
-/* ── ESTRUCTURA DE SLIDES ── */
-.slide {
-  position: relative;
-  min-height: 100vh;
-  width: 100%;
-  display: block;
-  padding: 80px 24px;
+h1{
+ font-family:'Open Sans',sans-serif;
+ font-weight:800;
+ font-size:clamp(3rem,8vw,7rem);
+ line-height:.95;
+ text-transform:uppercase;
 }
 
-.slide-inner {
-  max-width: 800px;
-  width: 100%;
-  margin: 0 auto;
+.texto{
+ margin-top:35px;
+ color:var(--gris-texto);
+ font-size:1.1rem;
+ line-height:1.8;
+ max-width:650px;
 }
 
-/* ── DISEÑO MACRO-TIPOGRÁFICO (Fragmentos de Juicios) ── */
-.macro-texto {
-  font-family: var(--font-macro);
-  font-weight: 900;
-  text-transform: uppercase;
-  font-size: 3.8rem;
-  line-height: 1.1;
-  letter-spacing: -2px;
-  color: var(--blanco-puro);
-  margin-bottom: 32px;
-  word-wrap: break-word;
+.juicio{
+ background:#000;
 }
 
-@media (max-width: 600px) {
-  .macro-texto {
-    font-size: 2.4rem;
-  }
+.juicio h2{
+ font-family:'Open Sans',sans-serif;
+ font-weight:900;
+ font-size:clamp(5rem,16vw,15rem);
+ line-height:.8;
+ letter-spacing:-.05em;
+ text-align:center;
 }
 
-/* ── TEXTOS INFORMATIVOS ── */
-.texto-info {
-  font-family: var(--font-info);
-  font-size: 1.05rem;
-  font-weight: 400;
-  color: var(--gris-informativo);
-  margin-bottom: 24px;
+.maquina{
+ font-family:'Roboto Mono',monospace;
+ color:#c80000;
+ font-size:clamp(1.8rem,4vw,4rem);
+ line-height:1.1;
 }
 
-/* ── FRASE MÁQUINA DE ESCRIBIR EN ROJO ── */
-.frase-registro {
-  font-family: var(--font-maquina);
-  color: var(--rojo-alerta);
-  font-size: 1.25rem;
-  margin: 28px 0;
-  display: inline-block;
-  border-left: 3px solid var(--rojo-alerta);
-  padding-left: 16px;
+.datos{
+ background:var(--gris);
 }
 
-/* ── SLIDE 6: GRÁFICO CON TONO NEUTRO SOLEMNE ── */
-.grafico-contenedor {
-  margin-top: 32px;
-  background: var(--fondo-gris);
-  border: 1px solid #2a2a2a;
-  padding: 30px;
-  border-radius: 4px;
+.grafico{
+ width:min(700px,80vw);
+ height:20px;
+ background:#222;
+ margin:40px 0;
+ overflow:hidden;
 }
 
-.barra-item {
-  margin-bottom: 20px;
+.grafico span{
+ display:block;
+ width:70%;
+ height:100%;
+ background:var(--acento);
 }
 
-.barra-label {
-  font-family: var(--font-info);
-  font-size: 0.95rem;
-  margin-bottom: 8px;
-  color: var(--blanco-puro);
-}
-
-.barra-pista {
-  background: #1a1a1a;
-  height: 12px;
-  border-radius: 2px;
-  overflow: hidden;
-  border: 1px solid #2a2a2a;
-}
-
-.barra-relleno {
-  background: var(--acento-grafico);
-  height: 100%;
-  width: 0;
-  transition: width 1.5s ease-in-out;
-}
-
-.barra-pct {
-  font-family: var(--font-info);
-  font-size: 0.85rem;
-  color: #888;
-  text-align: right;
-  margin-top: 4px;
+@media(max-width:600px){
+ .slide{padding:25px}
 }
