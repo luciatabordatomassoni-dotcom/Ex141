@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EX141 — Parque de Memorias Cinéticas (Edición Silencio)</title>
+  <!-- Fuentes desde Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Special+Elite&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+  <!-- Archivo CSS Externo -->
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+  <main>
+    <!-- Slide 1 -->
+    <section class="slide" id="slide-1">
+      <div class="slide-inner">
+        <h1 class="macro-texto">EX141<br>Parque de Memorias Cinéticas</h1>
+        <p class="texto-info">Un recorrido interactivo y performático de memoria sobre el Ex-Batallón de Comunicaciones 141, Córdoba, basado en testimonios de la Megacausa La Perla.</p>
+      </div>
+    </section>
+
+    <!-- Slide 2 -->
+    <section class="slide" id="slide-2">
+      <div class="slide-inner">
+        <h2 class="macro-texto">"EL SILENCIO ERA ABSOLUTO"</h2>
+        <p class="texto-info">Los fragmentos de los juicios operan aquí como imágenes macro-tipográficas. La palabra toma el espacio ante la ausencia de registros visuales oficiales.</p>
+        <span class="frase-registro">De este lugar no hay registros fotográficos</span>
+      </div>
+    </section>
+
+    <!-- Slide 6 -->
+    <section class="slide" id="slide-6">
+      <div class="slide-inner">
+        <h2 class="macro-texto">Datos del Recorrido</h2>
+        <p class="texto-info">Estadísticas y respuestas registradas durante el proyecto interactivo. Se utiliza un único tono neutro de acento para preservar la solemnidad del recurso gráfico.</p>
+        
+        <div class="grafico-contenedor">
+          <div class="barra-item">
+            <div class="barra-label">Respuestas sobre la percepción del espacio de memoria</div>
+            <div class="barra-pista">
+              <div class="barra-relleno" style="width: 78%;"></div>
+            </div>
+            <div class="barra-pct">78% de respuestas registradas</div>
+          </div>
+          <div class="barra-item">
+            <div class="barra-label">Impacto emocional de la macro-tipografía</div>
+            <div class="barra-pista">
+              <div class="barra-relleno" style="width: 92%;"></div>
+            </div>
+            <div class="barra-pct">92% de respuestas registradas</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Animación simple para las barras de datos al cargar el slide
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.querySelectorAll('.barra-relleno').forEach(bar => {
+          // El ancho definido inline se activa de forma fluida mediante la transición de CSS
+        });
+      }, 300);
+    });
+  </script>
+</body>
+</html>
