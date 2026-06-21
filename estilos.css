@@ -1,94 +1,665 @@
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
- --negro:#050505;
- --gris:#151515;
- --blanco:#fff;
- --gris-texto:#cfcfcf;
- --acento:#777;
-}
-html{scroll-behavior:smooth}
-body{
- background:var(--negro);
- color:var(--blanco);
- font-family:'Open Sans',sans-serif;
+
+/*
+  ═══════════════════════════════════════════════════════════════
+  EX141 — Parque de Memorias Cinéticas / Campus Sur UPC Córdoba
+  Hoja de estilos principal
+  ---------------------------------------------------------------
+  Tipografías (Google Fonts — SIL Open Font License 1.1):
+    · Bebas Neue    → macro-tipografía / fragmentos de juicio
+    · Special Elite → máquina de escribir / slide 4
+    · Open Sans     → textos informativos / alta legibilidad móvil
+  ---------------------------------------------------------------
+  Paleta: monocromática alto contraste + acento puntual slide 6
+  Versión: 1.0 — Junio 2025
+  ═══════════════════════════════════════════════════════════════
+*/
+
+/* ── GOOGLE FONTS IMPORT ── */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Open+Sans:wght@300;400;600&display=swap');
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   VARIABLES Y RESET
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+:root {
+  /* Paleta monocromática */
+  --negro:          #0a0a0a;
+  --negro-medio:    #111010;
+  --negro-suave:    #191818;
+  --gris-oscuro:    #242222;
+  --gris-borde:     rgba(255, 255, 255, 0.09);
+  --blanco:         #ffffff;
+  --blanco-hueso:   #F0EDE6;
+  --blanco-apagado: rgba(240, 237, 230, 0.55);
+  --blanco-tenue:   rgba(240, 237, 230, 0.25);
+  --blanco-ghost:   rgba(240, 237, 230, 0.10);
+
+  /* Único acento — slide 6 — neutro, no rompe solemnidad */
+  --acento:         #A0A09A;
+  --acento-borde:   rgba(160, 160, 154, 0.35);
+
+  /* Rojo máquina de escribir — solo slide 4 */
+  --rojo-mk:        #C0392B;
+  --rojo-mk-suave:  rgba(192, 57, 43, 0.65);
+
+  /* Tipografías */
+  --tipo-macro:     'Bebas Neue', sans-serif;
+  --tipo-maquina:   'Special Elite', monospace;
+  --tipo-body:      'Open Sans', sans-serif;
+
+  /* Espaciado base */
+  --margen:         15px;
+  --max-ancho:      680px;
 }
 
-.slide{
- min-height:100vh;
- display:flex;
- align-items:center;
- justify-content:center;
- padding:8vw;
- background:#050505;
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.contenido{
- max-width:900px;
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
 }
 
-.etiqueta{
- font-size:.85rem;
- letter-spacing:.18em;
- text-transform:uppercase;
- color:#aaa;
- margin-bottom:40px;
+body {
+  font-family: var(--tipo-body);
+  background-color: var(--negro);
+  color: var(--blanco-hueso);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-h1{
- font-family:'Open Sans',sans-serif;
- font-weight:800;
- font-size:clamp(3rem,8vw,7rem);
- line-height:.95;
- text-transform:uppercase;
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ESTRUCTURA DE SLIDES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.slide {
+  position: relative;
+  min-height: 100svh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--margen);
+  border-top: 1px solid var(--gris-borde);
 }
 
-.texto{
- margin-top:35px;
- color:var(--gris-texto);
- font-size:1.1rem;
- line-height:1.8;
- max-width:650px;
+.slide:first-of-type {
+  border-top: none;
 }
 
-.juicio{
- background:#000;
+/* Contenedor interno que recibe el fade de scroll */
+.slide-inner {
+  max-width: var(--max-ancho);
+  width: 100%;
+  margin: 0 auto;
+  will-change: opacity, transform;
+  transition: opacity 0.12s ease, transform 0.12s ease;
 }
 
-.juicio h2{
- font-family:'Open Sans',sans-serif;
- font-weight:900;
- font-size:clamp(5rem,16vw,15rem);
- line-height:.8;
- letter-spacing:-.05em;
- text-align:center;
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   COMPONENTES COMUNES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.etiqueta {
+  font-family: var(--tipo-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--blanco-tenue);
+  margin-bottom: 20px;
+  display: block;
 }
 
-.maquina{
- font-family:'Roboto Mono',monospace;
- color:#c80000;
- font-size:clamp(1.8rem,4vw,4rem);
- line-height:1.1;
+.numero-slide {
+  font-family: var(--tipo-body);
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 230, 0.22);
+  margin-bottom: 36px;
+  display: block;
 }
 
-.datos{
- background:var(--gris);
+.linea-separadora {
+  width: 36px;
+  height: 1px;
+  background-color: var(--gris-borde);
+  margin: 28px 0;
 }
 
-.grafico{
- width:min(700px,80vw);
- height:20px;
- background:#222;
- margin:40px 0;
- overflow:hidden;
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SLIDE 1 — HERO CON IMAGEN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#slide-1 {
+  background-color: var(--negro);
+  justify-content: flex-end;
+  padding-bottom: 60px;
+  overflow: hidden;
 }
 
-.grafico span{
- display:block;
- width:70%;
- height:100%;
- background:var(--acento);
+#slide-1 .bg-foto {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 30%;
+  /* Desaturación + oscurecimiento para reforzar el concepto de silencio */
+  filter: grayscale(75%) brightness(0.28) saturate(0.3);
+  z-index: 0;
 }
 
-@media(max-width:600px){
- .slide{padding:25px}
+/* Gradiente desde abajo para que el texto sea legible */
+#slide-1 .bg-foto::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 10, 10, 0.97) 0%,
+    rgba(10, 10, 10, 0.45) 55%,
+    rgba(10, 10, 10, 0.10) 100%
+  );
+}
+
+#slide-1 .slide-inner {
+  position: relative;
+  z-index: 2;
+}
+
+#slide-1 h1 {
+  font-family: var(--tipo-macro);
+  font-size: clamp(36px, 8vw, 72px);
+  font-weight: 400;           /* Bebas Neue solo tiene un peso */
+  line-height: 1.05;
+  letter-spacing: 0.03em;
+  color: var(--blanco);
+  margin-bottom: 22px;
+}
+
+#slide-1 .subtexto {
+  font-family: var(--tipo-body);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--blanco-apagado);
+  max-width: 400px;
+}
+
+#slide-1 .credito-foto {
+  margin-top: 28px;
+  font-family: var(--tipo-body);
+  font-size: 10px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: rgba(240, 237, 230, 0.25);
+}
+
+#slide-1 .credito-foto a {
+  color: rgba(240, 237, 230, 0.35);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Hint de scroll animado */
+.scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 44px;
+  font-family: var(--tipo-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 230, 0.28);
+}
+
+.scroll-hint .linea {
+  width: 28px;
+  height: 1px;
+  background-color: rgba(240, 237, 230, 0.2);
+  animation: pulso 2.2s ease-in-out infinite;
+}
+
+@keyframes pulso {
+  0%, 100% { opacity: 0.2; }
+  50%       { opacity: 0.9; }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SLIDE 2 — CONTEXTO HISTÓRICO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#slide-2 {
+  background-color: var(--negro-medio);
+}
+
+#slide-2 .cita-principal {
+  font-family: var(--tipo-macro);
+  font-size: clamp(30px, 6vw, 58px);
+  line-height: 1.10;
+  letter-spacing: 0.02em;
+  color: var(--blanco);
+  margin-bottom: 0;
+}
+
+#slide-2 .cita-principal em {
+  color: var(--blanco-apagado);
+  font-style: normal;
+}
+
+/* Grilla de datos históricos */
+.datos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 520px;
+}
+
+.dato-item {
+  border-left: 1px solid var(--gris-borde);
+  padding-left: 14px;
+}
+
+.dato-label {
+  font-family: var(--tipo-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 230, 0.28);
+  margin-bottom: 6px;
+}
+
+.dato-valor {
+  font-family: var(--tipo-body);
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--blanco-apagado);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SLIDE 3 — TESTIMONIO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#slide-3 {
+  background-color: var(--negro);
+}
+
+#slide-3 .etiqueta-roja {
+  font-family: var(--tipo-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(192, 57, 43, 0.70);
+  margin-bottom: 32px;
+  display: block;
+}
+
+/* Macro-tipografía: la frase funciona como imagen */
+#slide-3 .frase-gigante {
+  font-family: var(--tipo-macro);
+  font-size: clamp(38px, 9vw, 88px);
+  line-height: 1.0;
+  letter-spacing: 0.01em;
+  color: var(--blanco);
+  margin-bottom: 48px;
+}
+
+.bloque-testimonio {
+  border-left: 2px solid rgba(255, 255, 255, 0.15);
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.texto-testimonio {
+  font-family: var(--tipo-body);
+  font-size: 15px;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.85;
+  color: var(--blanco-apagado);
+}
+
+.texto-testimonio strong {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--blanco);
+}
+
+.fuente-testimonio {
+  font-family: var(--tipo-body);
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: rgba(240, 237, 230, 0.25);
+  line-height: 1.6;
+  margin-top: 16px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SLIDE 4 — VACÍO / SILENCIO
+   Máquina de escribir + rojo
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#slide-4 {
+  background-color: #060606;   /* negro profundo */
+}
+
+/* Título: rojo + máquina de escribir — única excepción cromática antes del slide 6 */
+#slide-4 .titulo-maquina {
+  font-family: var(--tipo-maquina);
+  font-size: clamp(20px, 4vw, 32px);
+  line-height: 1.45;
+  color: var(--rojo-mk);
+  margin-bottom: 32px;
+  letter-spacing: 0.01em;
+}
+
+/* Cursor parpadeante de máquina de escribir */
+.cursor-mk::after {
+  content: '█';
+  color: var(--rojo-mk);
+  font-size: 0.8em;
+  animation: blink-cursor 1.0s step-start infinite;
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+#slide-4 .parrafo-maquina {
+  font-family: var(--tipo-maquina);
+  font-size: clamp(14px, 2.5vw, 20px);
+  line-height: 2.1;
+  color: var(--rojo-mk-suave);
+  margin-bottom: 44px;
+  max-width: 480px;
+}
+
+#slide-4 .dato-silencio {
+  font-family: var(--tipo-maquina);
+  font-size: 12px;
+  line-height: 2.0;
+  color: rgba(192, 57, 43, 0.35);
+  border-top: 1px solid rgba(192, 57, 43, 0.12);
+  padding-top: 24px;
+  max-width: 460px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SLIDE 5 — ENCUESTA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#slide-5 {
+  background-color: var(--negro-medio);
+}
+
+#slide-5 .pregunta {
+  font-family: var(--tipo-macro);
+  font-size: clamp(32px, 7vw, 64px);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  color: var(--blanco);
+  margin-bottom: 14px;
+}
+
+#slide-5 .instruccion {
+  font-family: var(--tipo-body);
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(240, 237, 230, 0.38);
+  margin-bottom: 44px;
+  letter-spacing: 0.03em;
+}
+
+.opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 380px;
+}
+
+.opcion-btn {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(240, 237, 230, 0.65);
+  font-family: var(--tipo-body);
+  font-size: 15px;
+  font-weight: 400;
+  padding: 14px 20px;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 1px;
+  letter-spacing: 0.02em;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.opcion-btn:hover {
+  border-color: rgba(255, 255, 255, 0.40);
+  color: var(--blanco);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.opcion-btn.elegida {
+  border-color: rgba(255, 255, 255, 0.55);
+  color: var(--blanco);
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.confirmacion {
+  margin-top: 22px;
+  font-family: var(--tipo-body);
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: rgba(240, 237, 230, 0.38);
+  display: none;
+}
+
+.confirmacion.visible {
+  display: block;
+}
+
+.btn-ver-resultados {
+  margin-top: 28px;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  color: rgba(240, 237, 230, 0.50);
+  font-family: var(--tipo-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  padding: 11px 22px;
+  cursor: pointer;
+  border-radius: 1px;
+  transition: border-color 0.2s, color 0.2s;
+  display: none;
+}
+
+.btn-ver-resultados.visible {
+  display: inline-block;
+}
+
+.btn-ver-resultados:hover {
+  border-color: rgba(255, 255, 255, 0.45);
+  color: var(--blanco);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SLIDE 6 — RESULTADOS COLECTIVOS
+   Único lugar con acento de color
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#slide-6 {
+  background-color: var(--negro-suave);
+}
+
+#slide-6 .titulo-resultados {
+  font-family: var(--tipo-macro);
+  font-size: clamp(22px, 4.5vw, 42px);
+  line-height: 1.1;
+  color: var(--blanco);
+  margin-bottom: 8px;
+}
+
+#slide-6 .subtitulo-resultados {
+  font-family: var(--tipo-body);
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(240, 237, 230, 0.28);
+  margin-bottom: 48px;
+  letter-spacing: 0.04em;
+}
+
+/* Barras del gráfico */
+.barra-fila {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.barra-etiqueta {
+  font-family: var(--tipo-body);
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(240, 237, 230, 0.45);
+  width: 108px;
+  flex-shrink: 0;
+}
+
+/* Etiqueta de la elección del usuario: blanco pleno */
+.barra-etiqueta.elegida-label {
+  color: var(--blanco);
+  font-weight: 600;
+}
+
+.barra-pista {
+  flex: 1;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.08);
+  position: relative;
+}
+
+.barra-relleno {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.22);
+  transition: width 1.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 1px;
+}
+
+/* Acento neutro puntual — solo la barra elegida por el usuario */
+.barra-relleno.elegida-barra {
+  background-color: var(--acento);
+}
+
+.barra-pct {
+  font-family: var(--tipo-maquina);
+  font-size: 12px;
+  color: rgba(240, 237, 230, 0.30);
+  width: 36px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.barra-pct.elegida-pct {
+  color: var(--acento);
+}
+
+#slide-6 .total-respuestas {
+  margin-top: 40px;
+  font-family: var(--tipo-body);
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 230, 0.17);
+}
+
+/* Bloque de cierre con cita */
+#slide-6 .cierre {
+  margin-top: 52px;
+  padding-top: 28px;
+  border-top: 1px solid var(--gris-borde);
+}
+
+#slide-6 .cierre p {
+  font-family: var(--tipo-body);
+  font-size: 15px;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.80;
+  color: rgba(240, 237, 230, 0.40);
+  max-width: 500px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FOOTER / CRÉDITOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.creditos-footer {
+  padding: 44px var(--margen) 64px;
+  border-top: 1px solid var(--gris-borde);
+  max-width: var(--max-ancho);
+  margin: 0 auto;
+}
+
+.creditos-footer p {
+  font-family: var(--tipo-body);
+  font-size: 10px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: rgba(240, 237, 230, 0.20);
+  margin-bottom: 3px;
+}
+
+.creditos-footer strong {
+  color: rgba(240, 237, 230, 0.32);
+  font-weight: 600;
+}
+
+.creditos-footer a {
+  color: rgba(240, 237, 230, 0.32);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SCROLL FADE
+   JS calcula opacity + translateY
+   según distancia al centro del
+   viewport. El CSS solo gestiona
+   la transición suave.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.slide-inner {
+  transition: opacity 0.12s ease, transform 0.12s ease;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RESPONSIVE — MOBILE FIRST
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (max-width: 480px) {
+  #slide-1 { padding-bottom: 48px; }
+  .datos { grid-template-columns: 1fr; }
+  .barra-etiqueta { width: 90px; font-size: 12px; }
+  #slide-3 .frase-gigante { line-height: 0.95; }
+  .btn-ver-resultados { width: 100%; text-align: center; }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ACCESIBILIDAD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (prefers-reduced-motion: reduce) {
+  .slide-inner         { transition: none !important; }
+  .scroll-hint .linea  { animation: none; }
+  .cursor-mk::after    { animation: none; }
+  .barra-relleno       { transition: none; }
+}
+
+:focus-visible {
+  outline: 2px solid var(--blanco);
+  outline-offset: 4px;
 }
